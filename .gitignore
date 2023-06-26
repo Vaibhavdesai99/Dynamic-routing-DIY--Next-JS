@@ -1,0 +1,28 @@
+# Node.js
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Environment variables
+.env.local
+.env
+
+# IDE
+.idea/
+.vscode/
+
+# Logs and build artifacts
+*.log
+build/
+
+# Miscellaneous
+.DS_Store
+
+# Ignore nested .git directories
+**/.git
+
+# Ignore package-lock.json or yarn.lock files if using npm or yarn
+package-lock.json
+yarn.lock
