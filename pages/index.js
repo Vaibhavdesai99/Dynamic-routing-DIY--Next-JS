@@ -47,7 +47,12 @@ export async function getStaticProps() {
     props: {
       meetups: DUMMY_MEETUPS,
     },
+    revalidate: 5,
   };
 }
 
 export default HomePage;
+
+// npm run build : -
+
+// revalidate: 5 => property : - whatever we set the no here , this page get ocssionaly be pre-generated on the server after deployment, so we dont have to re-deploy or ew-build just caz of some data change
