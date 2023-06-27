@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import MeetUpList from "../components/meetups/MeetupList";
 const DUMMY_MEETUPS = [
   {
@@ -27,15 +28,33 @@ function HomePage(props) {
 }
 
 export async function getStaticProps() {
-  // fetch data from API
-  //  return must Object
-  // must have props property
-  // this props we need in HomePage as props.
+  // fetch data from API :
+
+  const client = await MongoClient.connect(
+    "mongodb+srv://vaibhavdesai510:0LpLmG5cJAsM73Rq@cluster0.7wbat33.mongodb.net/meetups?retryWrites=true&w=majority"
+  );
+
+  const db = client.db();
+
+  const meetupsCollection = db.collection("meetups");
+
+  const meetups = await meetupsCollection.find().toArray();
+
+  console.log(meetups);
+
+  client.close();
+
+  //  here in meetups : Dummy_Meetups  <= we get that from database .so we write meetups.map not DUMMY_MEALS (Dummydata)
   return {
     props: {
-      meetups: DUMMY_MEETUPS,
+      meetups: meetups.map((meetup) => ({
+        title: meetup.data.title,
+        address: meetup.data.address,
+        image: meetup.data.image,
+        id: meetup._id.toString(),
+      })),
     },
-    revalidate: 5,
+    revalidate: 1,
   };
 }
 
