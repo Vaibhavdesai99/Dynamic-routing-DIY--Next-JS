@@ -1,16 +1,22 @@
 import MeetupDetail from "../../components/meetups/MeetUpDetail";
 import { MongoClient, ObjectId } from "mongodb";
+import Head from "next/head";
 function MeetupDetails(props) {
   return (
-    <MeetupDetail
-      image={props.meetupData.image}
-      title={props.meetupData.title}
-      address={props.meetupData.address}
-      description={props.meetupData.description}
-    />
+    <>
+      <Head>
+        <title>{props.meetupData.title}</title>
+        <meta name="description" content={props.meetupData.description} />
+      </Head>
+      <MeetupDetail
+        image={props.meetupData.image}
+        title={props.meetupData.title}
+        address={props.meetupData.address}
+        description={props.meetupData.description}
+      />
+    </>
   );
 }
-
 export async function getStaticPaths() {
   const client = await MongoClient.connect(
     "mongodb+srv://vaibhavdesai510:0LpLmG5cJAsM73Rq@cluster0.7wbat33.mongodb.net/meetups?retryWrites=true&w=majority"
