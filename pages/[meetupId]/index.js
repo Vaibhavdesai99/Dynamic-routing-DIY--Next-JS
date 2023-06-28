@@ -47,19 +47,20 @@ export async function getStaticProps(context) {
   const meetupsCollection = db.collection("meetups");
 
   const selectedMeetups = await meetupsCollection.findOne({
-    _id: ObjectId(meetupId),
+    _id: new ObjectId(meetupId),
   });
 
+  // console.log(selectedMeetups);
   client.close();
   // console.log(meetupId); we see this console on terminal(developer server)  = >  not on browser caz the code between getStaticProps() run during built time
   return {
     props: {
       meetupData: {
         id: selectedMeetups._id.toString(),
-        title: selectedMeetups.title,
-        address: selectedMeetups.address,
-        image: selectedMeetups.image,
-        description: selectedMeetups.description,
+        title: selectedMeetups.data.title,
+        address: selectedMeetups.data.address,
+        image: selectedMeetups.data.image,
+        description: selectedMeetups.data.description,
       },
     },
   };

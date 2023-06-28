@@ -15,7 +15,7 @@ function newMeetUpPage() {
     });
 
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
   }
 
   return <NewMeetUpForm onAddMeetup={addMeetUpHandler} />;
